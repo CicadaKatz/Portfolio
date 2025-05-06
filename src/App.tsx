@@ -131,13 +131,21 @@ function AboutSection() {
         <h2 className="text-3xl font-bold mb-8 text-center">About Me</h2>
         <div className="max-w-3xl mx-auto text-gray-300">
           <p className="mb-4">
-            I'm a passionate developer focused on creating useful tools and applications.
-            My journey in programming started with a curiosity about how things work,
-            which led me to explore various technologies and frameworks.
+            I'm a Computer Science student passionate about Web Development, Software Development, 
+            Unreal Engine 5, and Cyber Security. Currently, I'm developing two exciting projects: 
+            ChronoZen, an all-in-one Chrome productivity suite with Pomodoro timer, task manager, 
+            and music controls, and Unsubly, a Chrome extension that helps users manage their email 
+            subscriptions.
           </p>
           <p className="mb-4">
-            When I'm not coding, you can find me exploring new technologies,
-            contributing to open-source projects, or learning new skills.
+            My tech stack includes React, Google APIs, Google Cloud, and I'm particularly interested 
+            in Chrome Extensions development. I'm always eager to collaborate and learn new technologies, 
+            especially in the areas of web development and browser extensions.
+          </p>
+          <p className="mb-4">
+            When I'm not coding, you can find me exploring new technologies, contributing to open-source 
+            projects, or diving into the world of game development with Unreal Engine 5. I'm based in 
+            Skopje, Macedonia, and I'm always open to new opportunities and collaborations.
           </p>
         </div>
       </div>
@@ -243,7 +251,7 @@ function ContactSection() {
           </p>
           <div className="flex justify-center space-x-6">
             <a
-              href="https://github.com/CicadaKatz"
+              href="https://github.com/LeonidMehandzhijski"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-primary transition-colors"
@@ -251,13 +259,13 @@ function ContactSection() {
               <Github size={24} />
             </a>
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:leonidmehandzijski@gmail.com"
               className="text-gray-300 hover:text-primary transition-colors"
             >
               <Mail size={24} />
             </a>
             <a
-              href="https://linkedin.com/in/your-profile"
+              href="https://www.linkedin.com/in/leonid-mehandzijski/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-primary transition-colors"
