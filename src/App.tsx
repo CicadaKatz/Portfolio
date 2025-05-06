@@ -107,26 +107,31 @@ function HeroSection() {
   return (
     <section id="home" className="section min-h-screen flex items-center">
       <div className="container text-center">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 relative">
-          <span className="inline-block">Hi, I'm</span>{' '}
-          <div 
-            className="inline-block relative group cursor-pointer"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <div className="relative overflow-hidden">
-              <div className={`transform transition-all duration-700 ease-in-out ${isHovered ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
-                <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
-                  Cicada Katz
-                </span>
-              </div>
-              <div className={`absolute top-0 left-0 transform transition-all duration-700 ease-in-out ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                <span className="bg-gradient-to-r from-primary via-purple-400 to-primary bg-clip-text text-transparent">
-                  Leonid Mehandzhijski
-                </span>
+        <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <div className="flex flex-col items-center">
+            <span className="inline-block">Hi, I'm</span>
+            <div 
+              className="relative group cursor-pointer mt-2"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <div className="relative">
+                {/* Dust particles container */}
+                <div className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                  <div className="dust-particles" />
+                </div>
+                
+                {/* Names container */}
+                <div className="relative">
+                  <div className={`transform transition-all duration-700 ease-in-out ${isHovered ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+                    <span className="text-primary">Cicada Katz</span>
+                  </div>
+                  <div className={`absolute top-0 left-0 transform transition-all duration-700 ease-in-out ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+                    <span className="text-primary">Leonid Mehandzhijski</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
           </div>
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 mb-8">
