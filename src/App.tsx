@@ -102,11 +102,25 @@ function Header() {
 }
 
 function HeroSection() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <section id="home" className="section min-h-screen flex items-center">
       <div className="container text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
-          Hi, I'm <span className="text-primary">Cicada Katz</span>
+          Hi, I'm{' '}
+          <span 
+            className="text-primary inline-block transition-all duration-500 ease-in-out cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <span className={`inline-block transition-all duration-500 ${isHovered ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
+              Cicada Katz
+            </span>
+            <span className={`absolute left-1/2 -translate-x-1/2 transition-all duration-500 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              Leonid Mehandzhijski
+            </span>
+          </span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 mb-8">
           Full Stack Developer & Chrome Extension Creator

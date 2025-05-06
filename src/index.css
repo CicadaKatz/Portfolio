@@ -28,4 +28,13 @@
   .btn-primary {
     @apply bg-primary text-white hover:bg-primary/90;
   }
+}
+
+/* Name transition styles */
+.text-primary {
+  @apply relative;
+}
+
+.text-primary span {
+  @apply whitespace-nowrap;
 } 
