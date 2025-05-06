@@ -107,20 +107,27 @@ function HeroSection() {
   return (
     <section id="home" className="section min-h-screen flex items-center">
       <div className="container text-center">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6">
-          Hi, I'm{' '}
-          <span 
-            className="text-primary inline-block transition-all duration-500 ease-in-out cursor-pointer"
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 relative">
+          <span className="inline-block">Hi, I'm</span>{' '}
+          <div 
+            className="inline-block relative group cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <span className={`inline-block transition-all duration-500 ${isHovered ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
-              Cicada Katz
-            </span>
-            <span className={`absolute left-1/2 -translate-x-1/2 transition-all duration-500 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              Leonid Mehandzhijski
-            </span>
-          </span>
+            <div className="relative overflow-hidden">
+              <div className={`transform transition-all duration-700 ease-in-out ${isHovered ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
+                <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
+                  Cicada Katz
+                </span>
+              </div>
+              <div className={`absolute top-0 left-0 transform transition-all duration-700 ease-in-out ${isHovered ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+                <span className="bg-gradient-to-r from-primary via-purple-400 to-primary bg-clip-text text-transparent">
+                  Leonid Mehandzhijski
+                </span>
+              </div>
+            </div>
+            <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
+          </div>
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 mb-8">
           Full Stack Developer & Chrome Extension Creator
