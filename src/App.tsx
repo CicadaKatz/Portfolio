@@ -259,7 +259,7 @@ function ContactSection() {
               <Github size={24} />
             </a>
             <a
-              href="mailto:leonidmehandzijski@gmail.com"
+              href="mailto:customer.support@cicadakatz.space"
               className="text-gray-300 hover:text-primary transition-colors"
             >
               <Mail size={24} />
