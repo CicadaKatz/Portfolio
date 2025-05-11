@@ -1,11 +1,28 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import React, { Suspense, useState } from 'react';
+import Header from './Header';
+import HeroSection from './HeroSection';
+// import AboutSection from './AboutSection';
+// import SkillsSection from './SkillsSection';
+// import ProjectsSection from './ProjectsSection';
+// import ContactSection from './ContactSection';
+import Footer from './Footer';
+// import { Loader2 } from 'lucide-react';
+import { Cardio } from 'ldrs/react';
+// import 'ldrs/react/cardio.css'; // CSS for Cardio is now in FullScreenLoader and App.tsx for SectionSpinner
+import AnimatedCursor from 'react-animated-cursor';
+import FullScreenLoader from './FullScreenLoader'; // Import the new loader
+
+// Lazy load sections
+const AboutSection = React.lazy(() => import('./AboutSection'));
+const SkillsSection = React.lazy(() => import('./SkillsSection'));
+const ProjectsSection = React.lazy(() => import('./ProjectsSection'));
+const ContactSection = React.lazy(() => import('./ContactSection'));
 
 const projects = [
   {
     title: 'Unsubly',
     description: 'A Chrome extension that helps users manage and unsubscribe from email subscriptions in their Gmail inbox.',
-    imageUrl: 'https://placehold.co/600x400/1e293b/0ea5e9?text=Unsubly',
+    imageUrl: '/icons/unsubly-icon.png',
     technologies: ['Chrome Extension', 'JavaScript', 'Gmail API'],
     demoUrl: 'https://cicadakatz.github.io/home-page/',
     privacyUrl: 'https://cicadakatz.github.io/unsubly-privacy/',
@@ -14,7 +31,7 @@ const projects = [
     title: 'Future Project X',
     description: 'An exciting project coming soon...',
     imageUrl: 'https://placehold.co/600x400/1e293b/0ea5e9?text=Coming+Soon',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS'],
+    technologies: ['???', '???', '???'],
     demoUrl: '#',
   },
 ];
@@ -25,308 +42,62 @@ const skills = [
   { name: 'React', level: 88 },
   { name: 'Node.js', level: 82 },
   { name: 'HTML/CSS', level: 95 },
+  { name: 'Vite.js', level: 80 },
 ];
 
-function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (current) setActiveSection(current);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+function SectionSpinner() {
   return (
-    <header className="fixed w-full bg-dark/90 backdrop-blur-sm z-50">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          <a href="#home" className="text-2xl font-bold text-primary">Cicada Katz</a>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {['home', 'about', 'skills', 'projects', 'contact'].map((section) => (
-              <a
-                key={section}
-                href={`#${section}`}
-                className={`capitalize hover:text-primary transition-colors ${
-                  activeSection === section ? 'text-primary' : ''
-                }`}
-              >
-                {section}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-100"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 space-y-4">
-            {['home', 'about', 'skills', 'projects', 'contact'].map((section) => (
-              <a
-                key={section}
-                href={`#${section}`}
-                className={`block capitalize hover:text-primary transition-colors ${
-                  activeSection === section ? 'text-primary' : ''
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {section}
-              </a>
-            ))}
-          </div>
-        )}
-      </nav>
-    </header>
-  );
-}
-
-function HeroSection() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <section id="home" className="section min-h-screen flex items-center">
-      <div className="container text-center">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6">
-          <div className="flex flex-col items-center">
-            <span className="inline-block">Hi, I'm</span>
-            <div 
-              className="relative group cursor-pointer mt-2"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              <div className="relative">
-                {/* Dust particles container */}
-                <div className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="dust-particles" />
-                </div>
-                
-                {/* Names container */}
-                <div className="relative">
-                  <div className={`transform transition-all duration-700 ease-in-out ${isHovered ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
-                    <span className="text-primary">Cicada Katz</span>
-                  </div>
-                  <div className={`absolute top-0 left-0 transform transition-all duration-700 ease-in-out ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                    <span className="text-primary">Leonid Mehandzhijski</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-300 mb-8">
-          Full Stack Developer & Chrome Extension Creator
-        </p>
-        <div className="flex justify-center space-x-4">
-          <a href="#projects" className="btn btn-primary">
-            View My Work
-          </a>
-          <a href="#contact" className="btn border border-primary text-primary hover:bg-primary/10">
-            Contact Me
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AboutSection() {
-  return (
-    <section id="about" className="section bg-secondary">
-      <div className="container">
-        <h2 className="text-3xl font-bold mb-8 text-center">About Me</h2>
-        <div className="max-w-3xl mx-auto text-gray-300">
-          <p className="mb-4">
-            I'm a Computer Science student passionate about Web Development, Software Development, 
-            Unreal Engine 5, and Cyber Security. Currently, I'm developing two exciting projects: 
-            ChronoZen, an all-in-one Chrome productivity suite with Pomodoro timer, task manager, 
-            and music controls, and Unsubly, a Chrome extension that helps users manage their email 
-            subscriptions.
-          </p>
-          <p className="mb-4">
-            My tech stack includes React, Google APIs, Google Cloud, and I'm particularly interested 
-            in Chrome Extensions development. I'm always eager to collaborate and learn new technologies, 
-            especially in the areas of web development and browser extensions.
-          </p>
-          <p className="mb-4">
-            When I'm not coding, you can find me exploring new technologies, contributing to open-source 
-            projects, or diving into the world of game development with Unreal Engine 5. I'm based in 
-            Skopje, Macedonia, and I'm always open to new opportunities and collaborations.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SkillsSection() {
-  return (
-    <section id="skills" className="section">
-      <div className="container">
-        <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
-        <div className="max-w-3xl mx-auto space-y-6">
-          {skills.map((skill) => (
-            <div key={skill.name}>
-              <div className="flex justify-between mb-2">
-                <span>{skill.name}</span>
-                <span>{skill.level}%</span>
-              </div>
-              <div className="h-2 bg-gray-700 rounded-full">
-                <div
-                  className="h-full bg-primary rounded-full"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProjectCard({ project }: { project: typeof projects[0] }) {
-  return (
-    <div className="bg-secondary rounded-lg overflow-hidden">
-      <img
-        src={project.imageUrl}
-        alt={project.title}
-        className="w-full h-48 object-cover"
-      />
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-        <p className="text-gray-300 mb-4">{project.description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        <div className="flex space-x-4">
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            View Demo
-          </a>
-          {project.privacyUrl && (
-            <a
-              href={project.privacyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn border border-primary text-primary hover:bg-primary/10"
-            >
-              Privacy Policy
-            </a>
-          )}
-        </div>
-      </div>
+    <div className="section flex justify-center items-center min-h-[calc(100vh-200px)]">
+      {/* <Loader2 className="h-16 w-16 text-primary animate-spin" /> */}
+      <Cardio size="60" stroke="3" speed="1.5" color="#0ea5e9" />
     </div>
   );
 }
 
-function ProjectsSection() {
-  return (
-    <section id="projects" className="section bg-secondary">
-      <div className="container">
-        <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ContactSection() {
-  return (
-    <section id="contact" className="section">
-      <div className="container">
-        <h2 className="text-3xl font-bold mb-8 text-center">Contact Me</h2>
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-gray-300 mb-8">
-            Feel free to reach out to me for any questions or opportunities!
-          </p>
-          <div className="flex justify-center space-x-6">
-            <a
-              href="https://github.com/LeonidMehandzhijski"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-primary transition-colors"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="mailto:customer.support@cicadakatz.space"
-              className="text-gray-300 hover:text-primary transition-colors"
-            >
-              <Mail size={24} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/leonid-mehandzijski/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-primary transition-colors"
-            >
-              <Linkedin size={24} />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="bg-secondary py-8">
-      <div className="container text-center text-gray-300">
-        <p>&copy; {new Date().getFullYear()} Cicada Katz. All rights reserved.</p>
-      </div>
-    </footer>
-  );
-}
-
 function App() {
+  const [isAppLoaded, setIsAppLoaded] = useState(false);
+
   return (
     <>
-      <Header />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-      <Footer />
+      {!isAppLoaded && <FullScreenLoader onLoaded={() => setIsAppLoaded(true)} />}
+
+      {isAppLoaded && (
+        <>
+          <AnimatedCursor
+            innerSize={8}
+            outerSize={35}
+            color='14, 165, 233' // Primary color (RGB for #0ea5e9)
+            outerAlpha={0.2}
+            innerScale={0.7}
+            outerScale={2} 
+            clickables={[
+              'a',
+              'input[type="text"]',
+              'input[type="email"]',
+              'input[type="number"]',
+              'input[type="submit"]',
+              'input[type="image"]',
+              'label[for]',
+              'select',
+              'textarea',
+              'button',
+              '.link',
+              '.clickable' // Added a generic .clickable class
+            ]}
+          />
+          <Header />
+          <main aria-label="Main content">
+            <HeroSection />
+            <Suspense fallback={<SectionSpinner />}>
+              <AboutSection />
+              <SkillsSection skills={skills} />
+              <ProjectsSection projects={projects} />
+              <ContactSection />
+            </Suspense>
+          </main>
+          <Footer />
+        </>
+      )}
     </>
   );
 }
