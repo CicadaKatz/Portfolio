@@ -2,6 +2,7 @@ import { ImageIcon } from 'lucide-react';
 import { Cardio } from 'ldrs/react';
 import 'ldrs/react/cardio.css';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 // Animation Variants
 const sectionContainerVariants = {
