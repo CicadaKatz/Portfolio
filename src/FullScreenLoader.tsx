@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Hourglass } from 'ldrs/react';
-import 'ldrs/react/hourglass.css?inline';
+import './styles/hourglass-loader.css';
 
 interface FullScreenLoaderProps {
   onLoaded: () => void;
