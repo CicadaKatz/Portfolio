@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Globe, Code2, Gamepad2, ShieldCheck, User, Lightbulb, Layers, Coffee, MapPin, Github, SearchCode } from 'lucide-react';
 

@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { motion } from 'framer-motion';
 
 const introLine1 = "Hello, My name is";
