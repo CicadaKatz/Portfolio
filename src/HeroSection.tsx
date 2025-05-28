@@ -150,7 +150,7 @@ function HeroSection() {
           className="text-xl md:text-2xl text-slate-600 dark:text-gray-300 mb-8"
           variants={heroItemVariants}
         >
-          Full Stack Developer & Chrome Extension Creator
+          Full Stack Developer
         </motion.p>
         <motion.div
           className="flex justify-center space-x-4"
