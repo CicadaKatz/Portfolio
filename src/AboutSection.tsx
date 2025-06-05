@@ -18,7 +18,7 @@ const panelData = [
     title: 'Current Ventures',
     content: (
       <>
-        Currently, I&apos;m developing two exciting projects: <strong className="text-primary font-semibold">ChronoZen</strong>, an all-in-one Chrome productivity suite with a Pomodoro timer, task manager, and music controls, and <strong className="text-primary font-semibold">Unsubly</strong>, a Chrome extension that helps users manage their email subscriptions.
+        Currently, I&apos;m developing two exciting projects: <strong className="text-primary font-semibold">Pelister</strong>, a 2D hack'n'slash Platformer, and <strong className="text-primary font-semibold">Unsubly</strong>, a Chrome extension that helps users manage their email subscriptions.
       </>
     ),
   },
@@ -28,7 +28,7 @@ const panelData = [
     title: 'Tech Toolkit',
     content: (
       <>
-        My tech stack includes React, Google APIs, and Google Cloud. I&apos;m particularly interested in Chrome Extensions development. I&apos;m always eager to collaborate and learn new technologies, especially in web development and browser extensions.
+        My tech stack includes React, Google APIs, and Google Cloud. I&apos;m particularly interested in Web development and Game development. I&apos;m always eager to collaborate and learn new technologies, especially in web development and browser extensions.
       </>
     ),
   },
