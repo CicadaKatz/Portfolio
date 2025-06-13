@@ -24,7 +24,7 @@ const projects = [
     description: 'A Chrome extension that helps users manage and unsubscribe from email subscriptions in their Gmail inbox.',
     imageUrl: '/icons/unsubly-icon.png',
     technologies: ['Chrome Extension', 'JavaScript', 'Gmail API'],
-    demoUrl: 'https://cicadakatz.github.io/home-page/',
+    demoUrl: 'https://chromewebstore.google.com/detail/unsubly/cajflcniadkjbdkpikijaniifdcfdfoc',
     privacyUrl: 'https://cicadakatz.github.io/unsubly-privacy/',
   },
   {
