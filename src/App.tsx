@@ -1,16 +1,10 @@
 import React, { Suspense, useState } from 'react';
 import Header from './Header';
 import HeroSection from './HeroSection';
-// import AboutSection from './AboutSection';
-// import SkillsSection from './SkillsSection';
-// import ProjectsSection from './ProjectsSection';
-// import ContactSection from './ContactSection';
 import Footer from './Footer';
-// import { Loader2 } from 'lucide-react';
 import { Cardio } from 'ldrs/react';
-// import 'ldrs/react/cardio.css'; // CSS for Cardio is now in FullScreenLoader and App.tsx for SectionSpinner
 import AnimatedCursor from 'react-animated-cursor';
-import FullScreenLoader from './FullScreenLoader'; // Import the new loader
+import FullScreenLoader from './FullScreenLoader';
 
 // Lazy load sections
 const AboutSection = React.lazy(() => import('./AboutSection'));
@@ -18,6 +12,7 @@ const SkillsSection = React.lazy(() => import('./SkillsSection'));
 const ProjectsSection = React.lazy(() => import('./ProjectsSection'));
 const ContactSection = React.lazy(() => import('./ContactSection'));
 
+// FIX: Updated the projects array with the Break Scheduler
 const projects = [
   {
     title: 'Unsubly',
@@ -26,6 +21,13 @@ const projects = [
     technologies: ['Chrome Extension', 'JavaScript', 'Gmail API'],
     demoUrl: 'https://chromewebstore.google.com/detail/unsubly/cajflcniadkjbdkpikijaniifdcfdfoc',
     privacyUrl: 'https://cicadakatz.github.io/unsubly-privacy/',
+  },
+  {
+    title: 'Break Scheduler',
+    description: 'A client-side application for managing team breaks, featuring a drag-and-drop interface and real-time status updates. Built with React and TypeScript.',
+    imageUrl: 'https://github.com/LeonidMehandzhijski/Break-Scheduler/raw/main/scheduler-demo-pic.png',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Drag & Drop'],
+    demoUrl: 'https://leonidmehandzhijski.github.io/Break-Scheduler/',
   },
   {
     title: 'Future Project X',
@@ -48,7 +50,6 @@ const skills = [
 function SectionSpinner() {
   return (
     <div className="section flex justify-center items-center min-h-[calc(100vh-200px)]">
-      {/* <Loader2 className="h-16 w-16 text-primary animate-spin" /> */}
       <Cardio size="60" stroke="3" speed="1.5" color="#0ea5e9" />
     </div>
   );
@@ -69,7 +70,7 @@ function App() {
             color='14, 165, 233' // Primary color (RGB for #0ea5e9)
             outerAlpha={0.2}
             innerScale={0.7}
-            outerScale={2} 
+            outerScale={2}
             clickables={[
               'a',
               'input[type="text"]',
@@ -82,7 +83,7 @@ function App() {
               'textarea',
               'button',
               '.link',
-              '.clickable' // Added a generic .clickable class
+              '.clickable'
             ]}
           />
           <Header />
@@ -102,4 +103,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
