@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 // Animation Variants
 const sectionContainerVariants = {
-  hidden: { opacity: 1 }, // Let children handle opacity
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
@@ -21,14 +21,14 @@ const sectionItemFadeInUp = {
 };
 
 const cardContainerVariants = {
-  hidden: { opacity: 0, y: 20 }, // Card itself fades and slides in
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
       ease: 'easeOut',
-      staggerChildren: 0.1, // Stagger children within the card
+      staggerChildren: 0.1,
     },
   },
 };
@@ -47,19 +47,13 @@ interface Project {
   privacyUrl?: string;
 }
 
-interface ProjectsSectionProps {
-  projects: Project[];
-}
-
 const COMING_SOON_IMAGE_URL_IDENTIFIER = 'text=Coming+Soon';
-// const TEXT_PLACEHOLDER_UNSUBLY_IDENTIFIER = 'TEXT_PLACEHOLDER_UNSUBLY'; // No longer needed
 
 function ProjectCard({ project }: { project: Project }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   const isComingSoonProject = project.imageUrl.includes(COMING_SOON_IMAGE_URL_IDENTIFIER);
-  // const isUnsublyTextPlaceholder = project.imageUrl === TEXT_PLACEHOLDER_UNSUBLY_IDENTIFIER; // No longer needed
 
   return (
     <motion.div
@@ -68,9 +62,9 @@ function ProjectCard({ project }: { project: Project }) {
     >
       <motion.div
         className={`relative w-full h-48 flex items-center justify-center ${
-          isComingSoonProject || project.imageUrl === '/icons/unsubly-icon.png' 
-            ? '' // No specific background for Coming Soon or Unsubly icon
-            : 'bg-slate-200 dark:bg-slate-700' // Default placeholder for other actual images
+          isComingSoonProject || project.imageUrl === '/icons/unsubly-icon.png'
+            ? ''
+            : 'bg-slate-200 dark:bg-slate-700'
         }`}
         variants={cardItemVariants}
       >
@@ -146,7 +140,33 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-function ProjectsSection({ projects }: ProjectsSectionProps) {
+function ProjectsSection() {
+  // The project data is now defined here
+  const projects: Project[] = [
+    {
+      title: 'Unsubly',
+      description: 'An open-source browser extension that simplifies unsubscribing from mailing lists with a single click, directly from your inbox.',
+      imageUrl: '/icons/unsubly-icon.png',
+      technologies: ['JavaScript', 'HTML', 'CSS', 'Webpack'],
+      demoUrl: 'https://github.com/LeonidMehandzhijski/Unsubly',
+      privacyUrl: '/unsubly-privacy-policy',
+    },
+    {
+      title: 'Break Scheduler',
+      description: 'A client-side application for managing team breaks, featuring a drag-and-drop interface and real-time status updates. Built with React and TypeScript.',
+      imageUrl: 'https://github.com/LeonidMehandzhijski/Break-Scheduler/raw/main/scheduler-demo-pic.png', // Using a direct image from your GitHub repo
+      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Drag & Drop'],
+      demoUrl: 'https://leonidmehandzhijski.github.io/Break-Scheduler/',
+    },
+    {
+      title: 'Project In Development',
+      description: 'A new and exciting project is currently in the works. Check back soon for more details!',
+      imageUrl: 'https://placehold.co/600x400/475569/ffffff?text=Coming+Soon',
+      technologies: ['React', 'Node.js', 'AI/ML'],
+      demoUrl: '#projects',
+    }
+  ];
+
   return (
     <motion.section
       id="projects"
@@ -181,4 +201,4 @@ function ProjectsSection({ projects }: ProjectsSectionProps) {
   );
 }
 
-export default ProjectsSection; 
+export default ProjectsSection;
