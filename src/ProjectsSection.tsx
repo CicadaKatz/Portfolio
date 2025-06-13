@@ -47,6 +47,11 @@ interface Project {
   privacyUrl?: string;
 }
 
+// FIX: Add the ProjectsSectionProps interface
+interface ProjectsSectionProps {
+  projects: Project[];
+}
+
 const COMING_SOON_IMAGE_URL_IDENTIFIER = 'text=Coming+Soon';
 
 function ProjectCard({ project }: { project: Project }) {
@@ -140,33 +145,10 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-function ProjectsSection() {
-  // The project data is now defined here
-  const projects: Project[] = [
-    {
-      title: 'Unsubly',
-      description: 'An open-source browser extension that simplifies unsubscribing from mailing lists with a single click, directly from your inbox.',
-      imageUrl: '/icons/unsubly-icon.png',
-      technologies: ['JavaScript', 'HTML', 'CSS', 'Webpack'],
-      demoUrl: 'https://github.com/LeonidMehandzhijski/Unsubly',
-      privacyUrl: '/unsubly-privacy-policy',
-    },
-    {
-      title: 'Break Scheduler',
-      description: 'A client-side application for managing team breaks, featuring a drag-and-drop interface and real-time status updates. Built with React and TypeScript.',
-      imageUrl: 'https://github.com/LeonidMehandzhijski/Break-Scheduler/raw/main/scheduler-demo-pic.png', // Using a direct image from your GitHub repo
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Drag & Drop'],
-      demoUrl: 'https://leonidmehandzhijski.github.io/Break-Scheduler/',
-    },
-    {
-      title: 'Project In Development',
-      description: 'A new and exciting project is currently in the works. Check back soon for more details!',
-      imageUrl: 'https://placehold.co/600x400/475569/ffffff?text=Coming+Soon',
-      technologies: ['React', 'Node.js', 'AI/ML'],
-      demoUrl: '#projects',
-    }
-  ];
-
+// FIX: The component now accepts 'projects' as a prop
+function ProjectsSection({ projects }: ProjectsSectionProps) {
+  // The project data is now received from the parent component, not defined here.
+  
   return (
     <motion.section
       id="projects"
