@@ -47,7 +47,6 @@ interface Project {
   privacyUrl?: string;
 }
 
-// FIX: Add the ProjectsSectionProps interface
 interface ProjectsSectionProps {
   projects: Project[];
 }
@@ -59,6 +58,9 @@ function ProjectCard({ project }: { project: Project }) {
   const [imageError, setImageError] = useState(false);
 
   const isComingSoonProject = project.imageUrl.includes(COMING_SOON_IMAGE_URL_IDENTIFIER);
+  
+  // FIX: This list now includes both logos that should have a transparent container
+  const selfContainedLogos = ['/icons/unsubly-icon.png', '/icons/break-scheduler-logo.png'];
 
   return (
     <motion.div
@@ -67,9 +69,9 @@ function ProjectCard({ project }: { project: Project }) {
     >
       <motion.div
         className={`relative w-full h-48 flex items-center justify-center ${
-          isComingSoonProject || project.imageUrl === '/icons/unsubly-icon.png'
-            ? ''
-            : 'bg-slate-200 dark:bg-slate-700'
+          isComingSoonProject || selfContainedLogos.includes(project.imageUrl)
+            ? '' // If it's a self-contained logo, add NO background
+            : 'bg-slate-200 dark:bg-slate-700' // For all other images, add a default gray background
         }`}
         variants={cardItemVariants}
       >
@@ -145,10 +147,7 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-// FIX: The component now accepts 'projects' as a prop
 function ProjectsSection({ projects }: ProjectsSectionProps) {
-  // The project data is now received from the parent component, not defined here.
-  
   return (
     <motion.section
       id="projects"
