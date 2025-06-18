@@ -15,7 +15,7 @@ const ContactSection = React.lazy(() => import('./ContactSection'));
 const projects = [
   {
     title: 'Unsubly',
-    description: 'A solo project this is a Chrome extension that helps users manage and unsubscribe from email subscriptions in their Gmail inbox using Google API.',
+    description: 'A solo project, this is a Chrome extension that helps users manage and unsubscribe from email subscriptions in their Gmail inbox using Google API.',
     imageUrl: '/icons/unsubly-icon.png',
     technologies: ['Chrome Extension', 'JavaScript', 'Gmail API'],
     demoUrl: 'https://chromewebstore.google.com/detail/unsubly/cajflcniadkjbdkpikijaniifdcfdfoc',
@@ -23,7 +23,7 @@ const projects = [
   },
   {
     title: 'Break Scheduler',
-    description: 'Made for a client this is an application for managing team breaks, featuring a drag-and-drop interface and real-time status updates. Built with React and TypeScript.',
+    description: 'Made for a client, this is an application for managing team breaks, featuring a drag-and-drop interface and real-time status updates. Built with React and TypeScript.',
     // FIX: This now points to your local logo file
     imageUrl: '/icons/break-scheduler-logo.png',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Drag & Drop'],
