@@ -12,7 +12,6 @@ const SkillsSection = React.lazy(() => import('./SkillsSection'));
 const ProjectsSection = React.lazy(() => import('./ProjectsSection'));
 const ContactSection = React.lazy(() => import('./ContactSection'));
 
-// FIX: Updated the projects array with the Break Scheduler
 const projects = [
   {
     title: 'Unsubly',
@@ -25,7 +24,8 @@ const projects = [
   {
     title: 'Break Scheduler',
     description: 'A client-side application for managing team breaks, featuring a drag-and-drop interface and real-time status updates. Built with React and TypeScript.',
-    imageUrl: 'https://github.com/LeonidMehandzhijski/Break-Scheduler/raw/main/scheduler-demo-pic.png',
+    // FIX: This now points to your local logo file
+    imageUrl: '/icons/break-scheduler-logo.png',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Drag & Drop'],
     demoUrl: 'https://leonidmehandzhijski.github.io/Break-Scheduler/',
   },
