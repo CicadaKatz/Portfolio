@@ -45,6 +45,10 @@ const skills = [
   { name: 'Node.js', level: 82 },
   { name: 'HTML/CSS', level: 95 },
   { name: 'Vite.js', level: 80 },
+  { name: 'Git', level: 80 },
+  { name: 'Java', level: 80 },
+  { name: 'C++', level: 80 },
+  { name: 'Unreal Engine 5', level: 80 },
 ];
 
 function SectionSpinner() {
