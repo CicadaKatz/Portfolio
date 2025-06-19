@@ -59,7 +59,6 @@ function ProjectCard({ project }: { project: Project }) {
 
   const isComingSoonProject = project.imageUrl.includes(COMING_SOON_IMAGE_URL_IDENTIFIER);
   
-  // FIX: This list now includes both logos that should have a transparent container
   const selfContainedLogos = ['/icons/unsubly-icon.png', '/icons/break-scheduler-logo.png'];
 
   return (
@@ -70,8 +69,8 @@ function ProjectCard({ project }: { project: Project }) {
       <motion.div
         className={`relative w-full h-48 flex items-center justify-center ${
           isComingSoonProject || selfContainedLogos.includes(project.imageUrl)
-            ? '' // If it's a self-contained logo, add NO background
-            : 'bg-slate-200 dark:bg-slate-700' // For all other images, add a default gray background
+            ? '' 
+            : 'bg-slate-200 dark:bg-slate-700' 
         }`}
         variants={cardItemVariants}
       >
