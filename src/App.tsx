@@ -24,7 +24,6 @@ const projects = [
   {
     title: 'Break Scheduler',
     description: 'Made for a client, this is an application for managing team breaks, featuring a drag-and-drop interface and real-time status updates. Built with React and TypeScript.',
-    // FIX: This now points to your local logo file
     imageUrl: '/icons/break-scheduler-logo.png',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Drag & Drop'],
     demoUrl: 'https://leonidmehandzhijski.github.io/Break-Scheduler/',
