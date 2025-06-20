@@ -10,8 +10,6 @@ const FullScreenLoader: React.FC<FullScreenLoaderProps> = ({ onLoaded }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // This timer simulates a load time. The onLoaded function is called 
-    // after the exit animation completes.
     const timer = setTimeout(() => {
       setIsVisible(false);
     }, 2000); 
