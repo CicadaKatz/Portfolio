@@ -30,6 +30,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
+  // Effect to handle active section highlighting on scroll
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'projects', 'contact'];
@@ -48,8 +49,17 @@ function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Effect to lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMenuOpen]);
+
   return (
-    <motion.header 
+    <motion.header
       className="fixed w-full bg-white/80 dark:bg-dark/90 backdrop-blur-sm z-50 shadow-md dark:shadow-none"
       role="banner"
       initial="hidden"
@@ -58,17 +68,17 @@ function Header() {
     >
       <nav className="container mx-auto px-4 py-4" role="navigation" aria-label="Main navigation">
         <div className="flex justify-between items-center">
-          <motion.a 
-            href="#home" 
+          <motion.a
+            href="#home"
             className="text-2xl font-bold text-primary"
             variants={titleVariants}
           >
             Cicada Katz
           </motion.a>
-          
+
           <div className="flex items-center space-x-4">
             {/* Desktop Navigation */}
-            <motion.div 
+            <motion.div
               className="hidden md:flex space-x-6"
             >
               {['home', 'about', 'skills', 'projects', 'contact'].map((section) => (
@@ -102,8 +112,8 @@ function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <motion.div 
-            id="mobile-menu" 
+          <motion.div
+            id="mobile-menu"
             className="md:hidden mt-4 space-y-2 bg-white dark:bg-dark rounded-md shadow-lg p-4"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -129,4 +139,4 @@ function Header() {
   );
 }
 
-export default Header; 
+export default Header;
