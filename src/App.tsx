@@ -90,7 +90,7 @@ function App() {
             ]}
           />
           <Header />
-          <main aria-label="Main content">
+          <main className="pt-20" aria-label="Main content">
             <HeroSection />
             <Suspense fallback={<SectionSpinner />}>
               <AboutSection />
