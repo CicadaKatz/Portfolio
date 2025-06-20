@@ -6,7 +6,7 @@ const introLine2 = "Also known as";
 const nameLine1 = "Leonid Mehandzhijski";
 const nameLine2 = "CicadaKatz";
 
-// Animation Timing Configuration
+// Animation Timing
 const cssAnimationDurationSeconds = 1.2;
 const animationDurationMs = cssAnimationDurationSeconds * 1000;
 const letterAnimationDelayMs = 40;
@@ -18,7 +18,7 @@ const animationCycleLockoutMs = Math.ceil(totalVisualAnimationTimeMs / 100) * 10
 
 // Animation Variants for Hero Section Content
 const heroContainerVariants = {
-  hidden: { opacity: 1 }, // Assuming section itself is part of page flow, not fading in as a whole block initially
+  hidden: { opacity: 1 }, 
   visible: {
     opacity: 1,
     transition: {
