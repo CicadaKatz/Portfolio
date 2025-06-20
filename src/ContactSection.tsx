@@ -1,7 +1,7 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Animation Variants (can be shared if they are generic enough)
+
 const sectionContainerVariants = {
   hidden: { opacity: 1 }, 
   visible: {
