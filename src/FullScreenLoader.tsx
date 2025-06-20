@@ -1,32 +1,49 @@
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Hourglass } from 'ldrs/react';
-import { useEffect } from 'react';
-import './styles/hourglass-loader.css';
 
 interface FullScreenLoaderProps {
   onLoaded: () => void;
 }
 
-function FullScreenLoader({ onLoaded }: FullScreenLoaderProps) {
+const FullScreenLoader: React.FC<FullScreenLoaderProps> = ({ onLoaded }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
   useEffect(() => {
-    // Simulate loading time and then call the onLoaded callback
+    // This timer simulates a load time. The onLoaded function is called 
+    // after the exit animation completes.
     const timer = setTimeout(() => {
-      onLoaded();
-    }, 2000); // Adjust time as needed
+      setIsVisible(false);
+    }, 2000); 
 
     return () => clearTimeout(timer);
   }, [onLoaded]);
 
   return (
-    <div className="full-screen-loader" role="status" aria-label="Loading portfolio">
-      <Hourglass
-        size="40"
-        bg-opacity="0.1"
-        speed="1.75"
-        color="white"
-      />
-      <p className="loading-text">Loading Portfolio...</p>
-    </div>
+    <AnimatePresence onExitComplete={onLoaded}>
+      {isVisible && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex flex-col justify-center items-center bg-slate-950 text-white"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.75, ease: 'easeInOut' }}
+        >
+          <Hourglass 
+            size="60" 
+            color="#0ea5e9" 
+          />
+          <motion.p 
+            className="mt-6 text-xl font-medium text-slate-300"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+          >
+            Loading Portfolio...
+          </motion.p>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
-}
+};
 
 export default FullScreenLoader;
