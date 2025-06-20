@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction, useEffect } from 'react';
+import { useState, Dispatch, SetStateAction, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 const introLine1 = "Hello, My name is";
@@ -6,24 +6,23 @@ const introLine2 = "Also known as";
 const nameLine1 = "Leonid Mehandzhijski";
 const nameLine2 = "CicadaKatz";
 
-// Animation Timing
+// (Animation timing constants remain the same)
 const cssAnimationDurationSeconds = 1.2;
 const animationDurationMs = cssAnimationDurationSeconds * 1000;
 const letterAnimationDelayMs = 40;
-const estimatedMaxLetters = 25; // Max letters in any single phrase for delay calculation
+const estimatedMaxLetters = 25;
 const maxStaggerDelayMs = (estimatedMaxLetters > 0 ? estimatedMaxLetters - 1 : 0) * letterAnimationDelayMs;
 const totalVisualAnimationTimeMs = maxStaggerDelayMs + animationDurationMs;
-// Lockout time to prevent re-triggering animation too soon & for class cleanup
-const animationCycleLockoutMs = Math.ceil(totalVisualAnimationTimeMs / 100) * 100 + 400; // Added more buffer
+const animationCycleLockoutMs = Math.ceil(totalVisualAnimationTimeMs / 100) * 100 + 400;
 
-// Animation Variants for Hero Section Content
+// (Animation variants remain the same)
 const heroContainerVariants = {
   hidden: { opacity: 1 }, 
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // Stagger children within the hero section
-      delayChildren: 0.5,   // Delay slightly after page/header load
+      staggerChildren: 0.2,
+      delayChildren: 0.5,
     },
   },
 };
@@ -50,6 +49,16 @@ function HeroSection() {
     { id: 'name2', content: nameLine2, isActive: false, animationClass: '' },
   ]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Effect to track window size
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const updateTextAnimation = (currentSet: TextItem[], setFunction: Dispatch<SetStateAction<TextItem[]>>) => {
     const activeIndex = currentSet.findIndex(t => t.isActive);
@@ -74,7 +83,8 @@ function HeroSection() {
     }, animationCycleLockoutMs);
   };
 
-  const handleMouseEnter = () => {
+  // Memoize the animation handler to prevent re-creating it on every render
+  const handleAnimationTrigger = useCallback(() => {
     if (isAnimating) return;
     setIsAnimating(true);
 
@@ -84,16 +94,24 @@ function HeroSection() {
     setTimeout(() => {
       setIsAnimating(false);
     }, animationCycleLockoutMs);
-  };
+  }, [isAnimating, introTexts, nameTexts]);
 
-  // Automatically trigger the animation once on component mount for all users
+  // Effect to set up the animation interval based on screen size
   useEffect(() => {
-    const timer = setTimeout(() => {
-      handleMouseEnter();
-    }, 1000); // 1-second delay after component loads
+    let animationInterval: NodeJS.Timeout | null = null;
 
-    return () => clearTimeout(timer); // Cleanup on unmount
-  }, []); // Empty dependency array ensures this runs only once
+    // 768px is the default 'md' breakpoint in Tailwind CSS
+    if (windowWidth < 768) {
+      animationInterval = setInterval(handleAnimationTrigger, 5000);
+    }
+
+    // Clean up the interval when the component unmounts or width changes
+    return () => {
+      if (animationInterval) {
+        clearInterval(animationInterval);
+      }
+    };
+  }, [windowWidth, handleAnimationTrigger]);
 
   return (
     <motion.section
@@ -111,10 +129,10 @@ function HeroSection() {
         >
           <div 
             className="flex flex-col items-center" 
-            onMouseEnter={handleMouseEnter} 
+            onMouseEnter={handleAnimationTrigger} // Still triggers on hover for desktop
             style={{ cursor: 'pointer' }}
           >
-            {/* Animated Intro Phrase */}
+            {/* ... (rest of the JSX for text rendering is the same) */}
             <div className="text-container">
               {introTexts.map(textItem => (
                 <div
@@ -134,7 +152,6 @@ function HeroSection() {
               ))}
             </div>
 
-            {/* Animated Name Phrase */}
             <div className="text-container mt-1 md:mt-2">
               {nameTexts.map(textItem => (
                 <div
