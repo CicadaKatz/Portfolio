@@ -1,6 +1,5 @@
 import { ImageIcon } from 'lucide-react';
 import { Cardio } from 'ldrs/react';
-import './styles/cardio-loader.css';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
