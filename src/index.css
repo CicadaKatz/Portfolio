@@ -46,13 +46,12 @@
 /* Name transition styles (Hero Section) */
 .letter.text-primary {
    /* text-primary defined in tailwind.config.js will be used */
-   /* No specific dark mode needed here if primary color is universal */
 }
-.letter { /* For "Hello, my name is" - ensure it's visible in light mode */
+.letter { 
   @apply text-slate-800 dark:text-gray-100;
 }
 
-/* Text Wave Transition Styles - these should be theme-agnostic */
+/* Text Wave Transition Styles */
 .text-container {
   position: relative;
   display: inline-block;
@@ -79,8 +78,6 @@
   opacity: 1;
   pointer-events: all;
 }
-
-/* .letter styles are above, handling light/dark for the two parts */
 
 @keyframes waveOut {
   0% {
@@ -119,14 +116,3 @@
 .wave-out .letter {
   animation: waveOut 1.2s ease forwards;
 }
-
-/* Remove old dust particle styles as they are no longer used */
-/* 
-.dust-particles {
-  ...
-}
-...
-@keyframes dust-fade {
-  ...
-}
-*/ 
