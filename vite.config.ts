@@ -7,8 +7,6 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       'ldrs',
-      'ldrs/react/hourglass',
-      'ldrs/react/cardio'
     ],
   },
   build: {
@@ -25,4 +23,4 @@ export default defineConfig({
     port: 3000,
     host: true
   }
-}); 
+});
