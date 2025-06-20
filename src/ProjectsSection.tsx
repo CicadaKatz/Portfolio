@@ -58,7 +58,7 @@ function ProjectCard({ project }: { project: Project }) {
   const [imageError, setImageError] = useState(false);
 
   const isComingSoonProject = project.imageUrl.includes(COMING_SOON_IMAGE_URL_IDENTIFIER);
-  
+
   const selfContainedLogos = ['/icons/unsubly-icon.png', '/icons/break-scheduler-logo.png'];
 
   return (
@@ -67,10 +67,10 @@ function ProjectCard({ project }: { project: Project }) {
       variants={cardContainerVariants}
     >
       <motion.div
-        className={`relative w-full h-48 flex items-center justify-center ${
+        className={`relative w-full h-40 sm:h-48 flex items-center justify-center ${
           isComingSoonProject || selfContainedLogos.includes(project.imageUrl)
-            ? '' 
-            : 'bg-slate-200 dark:bg-slate-700' 
+            ? ''
+            : 'bg-slate-200 dark:bg-slate-700'
         }`}
         variants={cardItemVariants}
       >
@@ -121,7 +121,7 @@ function ProjectCard({ project }: { project: Project }) {
             </motion.span>
           ))}
         </motion.div>
-        <motion.div className="flex space-x-4 mt-auto" variants={cardItemVariants}>
+        <motion.div className="flex flex-wrap gap-4 mt-auto" variants={cardItemVariants}>
           <a
             href={project.demoUrl}
             target="_blank"
