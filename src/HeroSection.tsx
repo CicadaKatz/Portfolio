@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const introLine1 = "Hello, My name is";
@@ -18,7 +18,7 @@ const animationCycleLockoutMs = Math.ceil(totalVisualAnimationTimeMs / 100) * 10
 
 // Animation Variants for Hero Section Content
 const heroContainerVariants = {
-  hidden: { opacity: 1 },
+  hidden: { opacity: 1 }, 
   visible: {
     opacity: 1,
     transition: {
@@ -71,7 +71,7 @@ function HeroSection() {
           return text;
         })
       );
-    }, animationCycleLockoutMs); // Use the full lockout time for class cleanup
+    }, animationCycleLockoutMs);
   };
 
   const handleMouseEnter = () => {
@@ -86,9 +86,18 @@ function HeroSection() {
     }, animationCycleLockoutMs);
   };
 
+  // Automatically trigger the animation once on component mount for all users
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleMouseEnter();
+    }, 1000); // 1-second delay after component loads
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []); // Empty dependency array ensures this runs only once
+
   return (
     <motion.section
-      id="home"
+      id="home" 
       className="section min-h-screen flex items-center"
       aria-label="Hero section"
       variants={heroContainerVariants}
@@ -96,13 +105,13 @@ function HeroSection() {
       animate="visible"
     >
       <div className="container text-center">
-        <motion.h1
+        <motion.h1 
           className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
           variants={heroItemVariants}
         >
-          <div
-            className="flex flex-col items-center"
-            onMouseEnter={handleMouseEnter}
+          <div 
+            className="flex flex-col items-center" 
+            onMouseEnter={handleMouseEnter} 
             style={{ cursor: 'pointer' }}
           >
             {/* Animated Intro Phrase */}
@@ -146,7 +155,7 @@ function HeroSection() {
             </div>
           </div>
         </motion.h1>
-        <motion.p
+        <motion.p 
           className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-gray-300 mb-8"
           variants={heroItemVariants}
         >
