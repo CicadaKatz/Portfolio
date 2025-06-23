@@ -16,7 +16,7 @@ function Footer() {
       variants={itemFadeInUpVariants}
     >
       <div className="container text-center text-slate-600 dark:text-gray-300">
-        <p>&copy; {new Date().getFullYear()} Cicada Katz. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Cicada Katz Space.</p>
       </div>
     </motion.footer>
   );
